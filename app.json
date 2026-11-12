@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "iwamad-sis3-tasks",
+    "name": "Campus Tasks",
     "slug": "iwamad-sis3-tasks",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,15 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "iwamad-sis3-tasks",
+    "experiments": {
+      "baseUrl": "/iwamad-sis3-tasks"
     }
   }
 }
