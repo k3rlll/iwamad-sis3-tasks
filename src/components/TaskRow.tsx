@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import type { Task } from '../data/tasks';
@@ -11,7 +11,7 @@ type Props = { task: Task; index: number };
 export default function TaskRow({ task, index }: Props) {
   const [confirming, setConfirming] = useState(false);
   const { deleteTask } = useTasks();
-  const progress = useRef(new Animated.Value(0)).current;
+  const [progress] = useState(() => new Animated.Value(0));
 
   useEffect(() => {
     const animation = Animated.timing(progress, { toValue: 1, duration: 300, useNativeDriver: true });
