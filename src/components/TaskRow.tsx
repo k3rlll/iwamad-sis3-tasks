@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { router } from 'expo-router';
 import type { Task } from '../data/tasks';
@@ -10,12 +10,20 @@ type Props = { task: Task; index: number };
 export default function TaskRow({ task, index }: Props) {
   const { deleteTask } = useTasks();
   const [progress] = useState(() => new Animated.Value(0));
+  const deleteOnRelease = useRef(false);
 
   useEffect(() => {
     const animation = Animated.timing(progress, { toValue: 1, duration: 300, useNativeDriver: true });
     animation.start();
     return () => animation.stop();
   }, [progress]);
+
+  function handlePressOut() {
+    if (deleteOnRelease.current) {
+      deleteOnRelease.current = false;
+      deleteTask(task.id);
+    }
+  }
 
   return (
     <Animated.View style={{ opacity: progress, transform: [{ translateY: progress.interpolate({ inputRange: [0, 1], outputRange: [14, 0] }) }] }}>
@@ -24,7 +32,8 @@ export default function TaskRow({ task, index }: Props) {
         accessibilityLabel={`Open ${task.title}`}
         accessibilityHint="Long-press to delete this task"
         onPress={() => router.push(`/tasks/${task.id}`)}
-        onLongPress={() => deleteTask(task.id)}
+        onLongPress={() => { deleteOnRelease.current = true; }}
+        onPressOut={handlePressOut}
         style={({ pressed }) => [styles.row, pressed && styles.pressed]}
       >
         <View style={styles.number}>
