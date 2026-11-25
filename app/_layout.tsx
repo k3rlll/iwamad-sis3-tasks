@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { TasksProvider } from '../src/context/TasksContext';
 import { colors } from '../src/theme';
 
-export const unstable_settings = { initialRouteName: 'index' };
+export const unstable_settings = { anchor: 'index' };
 
 export default function RootLayout() {
   return (

@@ -27,9 +27,6 @@ export default function NewTaskScreen() {
   return (
     <KeyboardAvoidingView style={layout.screen} behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={headerHeight}>
       <ScrollView keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag" contentContainerStyle={[layout.content, { paddingBottom: Math.max(insets.bottom, 24) }]}>
-        <Text style={layout.eyebrow}>ONE SMALL STEP</Text>
-        <Text style={layout.title}>What is next?</Text>
-        <Text style={layout.body}>Give your task a clear title. A few notes can help you get started.</Text>
         <View style={{ gap: 10 }}>
           <Text style={styles.label}>Title</Text>
           <TextInput accessibilityLabel="Task title" value={title} onChangeText={(text) => { setTitle(text); setError(''); }} placeholder="e.g. Prepare the workshop demo" placeholderTextColor={colors.muted} style={[styles.input, error ? styles.invalid : undefined]} maxLength={100} returnKeyType="next" onSubmitEditing={() => notesInput.current?.focus()} submitBehavior="submit" autoFocus />
